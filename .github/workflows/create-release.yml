@@ -97,6 +97,12 @@ jobs:
         # output_path: "/github/workspace/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
         output_path: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
 
+    - name: print-debug
+      id: print-debug
+      run: |
+        ls "${GITHUB_WORKSPACE}"
+        ls -la "${GITHUB_WORKSPACE}"
+
     - name: Find and Download Previous Patched USNs
       id: download_patched
       uses: paketo-buildpacks/github-config/actions/release/find-and-download-asset@main
@@ -104,7 +110,8 @@ jobs:
         asset_pattern: "${{ matrix.arch }}-${{ env.PATCHED_USNS_FILENAME }}"
         search_depth: "-1"   # Search all releases
         repo: ${{ github.repository }}
-        output_path: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.PATCHED_USNS_FILENAME }}-previous"
+        # output_path: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.PATCHED_USNS_FILENAME }}-previous"
+        output_path: "/github/workspace/${{ matrix.arch }}-${{ env.PATCHED_USNS_FILENAME }}-previous"
         token: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
 
     - name: Output Patched USNs as JSON String
