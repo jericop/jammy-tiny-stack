@@ -94,8 +94,8 @@ jobs:
       with:
         build_receipt: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.BUILD_RECEIPT_FILENAME }}"
         run_receipt: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.RUN_RECEIPT_FILENAME }}"
-        output_path: "/github/workspace/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
-        # output_path: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
+        # output_path: "/github/workspace/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
+        output_path: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
 
     - name: Find and Download Previous Patched USNs
       id: download_patched
@@ -128,8 +128,8 @@ jobs:
       uses: paketo-buildpacks/github-config/actions/stack/get-usns@main
       with:
         distribution: ${{ steps.distro.outputs.distro }}
-        # packages_filepath: ${{ steps.packages.outputs.output_path }}
-        packages_filepath: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
+        packages_filepath: ${{ steps.packages.outputs.output_path }}
+        # packages_filepath: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
         last_usns: ${{ steps.patched.outputs.patched }}
 
     - name: Write USNs File
