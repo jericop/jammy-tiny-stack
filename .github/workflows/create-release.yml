@@ -135,8 +135,9 @@ jobs:
       uses: paketo-buildpacks/github-config/actions/stack/get-usns@main
       with:
         distribution: ${{ steps.distro.outputs.distro }}
-        packages_filepath: ${{ steps.packages.outputs.output_path }}
+        # packages_filepath: ${{ steps.packages.outputs.output_path }}
         # packages_filepath: "${{ github.workspace }}/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
+        packages_filepath: "/github/workspace/${{ matrix.arch }}-${{ env.PACKAGES_FILENAME }}"
         last_usns: ${{ steps.patched.outputs.patched }}
 
     - name: Write USNs File
