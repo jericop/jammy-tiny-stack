@@ -64,12 +64,12 @@ func testBuildpackIntegration(t *testing.T, context spec.G, it spec.S) {
 		buildpackStore := occam.NewBuildpackStore()
 
 		buildPlanBuildpack, err = buildpackStore.Get.
-			Execute("github.com/paketo-community/build-plan")
+			Execute("paketocommunity/build-plan")
 		Expect(err).NotTo(HaveOccurred())
 
 		goDistBuildpack, err = buildpackStore.Get.
 			WithVersion("1.2.3").
-			Execute("github.com/paketo-buildpacks/go-dist")
+			Execute("paketobuildpacks/go-dist")
 		Expect(err).NotTo(HaveOccurred())
 
 		source, err = occam.Source(filepath.Join("integration", "testdata", "simple_app"))
